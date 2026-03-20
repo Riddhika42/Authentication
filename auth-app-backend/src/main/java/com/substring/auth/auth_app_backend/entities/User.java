@@ -1,11 +1,9 @@
 package com.substring.auth.auth_app_backend.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.data.annotation.Id;
+import lombok.*;
+
+import jakarta.persistence.Id;
 
 import java.time.Instant;
 import java.util.HashSet;
@@ -15,11 +13,10 @@ import java.util.UUID;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-
-
 @Entity
-@Table(name="users")
+@Table(name = "users")
 
 public class User {
     @Id
@@ -37,18 +34,25 @@ public class User {
     private Instant updatedAt =  Instant.now();
 
 
-//    private String gender;
-//    private Address address;
-    @Enumerated(EnumType.STRING)
+@Enumerated(EnumType.STRING)
     private Provider provider = Provider.LOCAL;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "user_"),
+            joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
     @PrePersist
     protected void onCreate() {
+
+        Instant now = Instant.now();
+        if (createdAt == null) createdAt = now;
+        updatedAt = now;
     }
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = Instant.now();
+    }
+
 }
