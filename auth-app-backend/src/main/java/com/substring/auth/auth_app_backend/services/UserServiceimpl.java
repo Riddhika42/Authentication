@@ -4,6 +4,7 @@ import com.substring.auth.auth_app_backend.dtos.UserDto;
 import com.substring.auth.auth_app_backend.entities.Provider;
 import com.substring.auth.auth_app_backend.entities.User;
 import com.substring.auth.auth_app_backend.repositories.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ public class UserServiceimpl implements UserService{
 
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
+
     @Override
     public UserDto createUser(UserDto userDto) {
         if (userDto.getEmail() == null || userDto.getEmail().isBlank()) {
@@ -51,7 +53,13 @@ public class UserServiceimpl implements UserService{
     }
 
     @Override
+    @Transactional
     public Iterable<UserDto> getAllUsers() {
-        return null;
+        return userRepository
+                .findAll()
+                .stream()
+                .map(user -> modelMapper.map(user, UserDto.class))
+                .toList();
     }
 }
+
