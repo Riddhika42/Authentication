@@ -59,7 +59,7 @@ public class UserServiceimpl implements UserService {
         if (userDto.getProvider() != null) existingUser.setProvider(userDto.getProvider());
         //TODO: change password updation logic...
         if (userDto.getPassword() != null) existingUser.setPassword(userDto.getPassword());
-        existingUser.setEnabled(userDto.isEnabled());
+        existingUser.setEnable(userDto.isEnabled());
         existingUser.setUpdatedAt(Instant.now());
         User updatedUser = userRepository.save(existingUser);
 
