@@ -13,14 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/auth")
 @AllArgsConstructor
+
+
+@RequestMapping("/api/v1/auth")
 public class AuthController {
 
-    private  final AuthService authService;
-
     @PostMapping("/register")
-    public ResponseEntity<UserDto> registerUser(@RequestBody UserDto userDto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(authService.registerUser(userDto));
+    public ResponseEntity<?> register(@RequestBody UserDto userDto) {
+        // logic
+        return ResponseEntity.ok("User registered");
     }
 }
