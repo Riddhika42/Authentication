@@ -1,7 +1,6 @@
 package com.substring.auth.auth_app_backend.services.Impl;
 
 import com.substring.auth.auth_app_backend.dtos.UserDto;
-import com.substring.auth.auth_app_backend.entities.Provider;
 import com.substring.auth.auth_app_backend.entities.User;
 import com.substring.auth.auth_app_backend.exceptions.ResourceNotFoundException;
 import com.substring.auth.auth_app_backend.helpers.UserHelper;

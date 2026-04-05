@@ -2,7 +2,6 @@ package com.substring.auth.auth_app_backend.dtos;
 
 import com.substring.auth.auth_app_backend.entities.Provider;
 import com.substring.auth.auth_app_backend.entities.Role;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
