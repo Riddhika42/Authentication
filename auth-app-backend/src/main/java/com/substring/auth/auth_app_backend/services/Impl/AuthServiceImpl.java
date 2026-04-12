@@ -18,11 +18,7 @@ public class AuthServiceImpl implements AuthService {
     private  final PasswordEncoder passwordEncoder;
     @Override
     public UserDto registerUser(UserDto userDto) {
-
-        UserDto userDto1 =userService.createUser(userDto);
-
         userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
-
         return userService.createUser(userDto);
     }
 

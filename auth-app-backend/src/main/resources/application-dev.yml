@@ -58,3 +58,6 @@ security:
 app:
   cors:
     front-end-url: http://localhost:3000
+  auth:
+    frontend:
+      success-redirect: http://localhost:3000

@@ -48,10 +48,19 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable).cors(Customizer.withDefaults()).sessionManagement(sm -> sm.
                         sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorizeHttpRequests ->
-                        authorizeHttpRequests.requestMatchers(AppConstants.AUTH_PUBLIC_URLS).permitAll()
+                        authorizeHttpRequests
+                                .requestMatchers(HttpMethod.POST, "/api/v1/users").permitAll() // ✅ ADD THIS
+                                .requestMatchers(AppConstants.AUTH_PUBLIC_URLS).permitAll()
                                 .requestMatchers(AppConstants.AUTH_ADMIN_URLS).hasRole(AppConstants.ADMIN_ROLE)
                                 .requestMatchers(AppConstants.AUTH_GUEST_URLS).hasRole(AppConstants.GUEST_ROLE)
-                                .anyRequest().authenticated()).oauth2Login(oauth2 -> oauth2.successHandler(successHandler).failureHandler(null)).logout(AbstractHttpConfigurer::disable).exceptionHandling(ex -> ex.authenticationEntryPoint((request, response, e) -> {
+                                .anyRequest().authenticated()
+                ).oauth2Login(
+                                        oauth2 -> oauth2.successHandler(successHandler)
+                        .failureHandler(null))
+                .logout(AbstractHttpConfigurer::disable)
+                .exceptionHandling(
+                        ex -> ex.authenticationEntryPoint
+                                ((request, response, e) -> {
                     //error message
 //                    e.printStackTrace();
                     response.setStatus(401);

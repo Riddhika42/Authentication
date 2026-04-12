@@ -41,7 +41,8 @@ import java.util.UUID;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/v1/auth")
-public class AuthController {
+public class
+AuthController {
 
     private final AuthService authService;
     private final RefreshTokenRepository refreshTokenRepository;
@@ -217,7 +218,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody UserDto userDto) {
-        // logic
+        authService.registerUser(userDto);
         return ResponseEntity.ok("User registered");
     }
 }

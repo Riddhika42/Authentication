@@ -24,10 +24,9 @@ public class UserDto {
     private String name;
     private String password;
     private String image;
-    private boolean enabled = true;
+    private boolean enabled ;
     private Instant createdAt = Instant.now();
     private Instant updatedAt =  Instant.now();
     private Provider provider = Provider.LOCAL;
-    private Set<Role> roles = new HashSet<>();
-}
+    private Set<String> roles = new HashSet<>();}
 

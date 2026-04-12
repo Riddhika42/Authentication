@@ -137,5 +137,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 //        response.getWriter().write("Login successful");
         response.sendRedirect(frontEndSuccessUrl);
 
+
+        
     }
 }
