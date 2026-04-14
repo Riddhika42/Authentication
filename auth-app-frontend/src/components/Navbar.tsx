@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from "react-router";
 import { Button } from './ui/button'
 function Navbar() {
   return (
-   <nav className="py-5  dark:border-b border-gray-700 md:py-0 flex md:flex-row gap-4 md:gap-0 flex-col md:h-14 justify-around items-center    ">
+   <nav className="py-5  dark:border-b border-gray-700 md:py-0 flex md:flex-row gap-4 md:gap-0 flex-col md:h-14 justify-around items-center">
       {/* brand */}
       <div className="font-semibold items-center flex gap-2">
         <span className="inline-block text-center h-6 w-6 rounded-md bg-gradient-to-r from-primary to-primary/40">
