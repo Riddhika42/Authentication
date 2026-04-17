@@ -35,7 +35,6 @@ function Login() {
   const handleFormSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
-    //validation:
     if (loginData.email.trim() === "") {
       toast.error("Input required !");
       return;
@@ -184,5 +183,4 @@ function Login() {
     </div>
   );
 }
-
 export default Login;

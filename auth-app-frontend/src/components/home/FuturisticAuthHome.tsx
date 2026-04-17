@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
-import { Shield, Lock, Zap, UserCheck, Fingerprint, Sparkle, Sparkles } from "lucide-react";
+import { Shield, Lock, Sparkles, Fingerprint } from "lucide-react";
 
 export default function FuturisticAuthHome() {
   return (

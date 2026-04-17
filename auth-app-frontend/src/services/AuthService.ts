@@ -1,5 +1,8 @@
 import type RegisterData from "@/models/RegisterData";
 import apiClient from "@/config/ApiClient";
+import type LoginResponseData from "@/models/LoginResponseData";
+import type User from "@/models/User";
+import type LoginData from "@/models/LoginData";
 
 
 export const registerUser=()=>{
