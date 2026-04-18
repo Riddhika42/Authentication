@@ -55,14 +55,14 @@ AuthController {
     private final CookieService cookieService;
     @PostMapping("/login")
     public ResponseEntity<TokenResponse> login(@RequestBody LoginRequest loginRequest, HttpServletResponse response)
-         {
+    {
 
-           Authentication authenticate = authenticate(loginRequest);
+        Authentication authenticate = authenticate(loginRequest);
         User user = userRepository.findByEmail(loginRequest.email())
                 .orElseThrow(() -> new BadCredentialsException("Invalid credentials"));
-            if(!user.isEnabled()){
-                throw   new DisabledException("Invalid credentials");
-            }
+        if(!user.isEnabled()){
+            throw   new DisabledException("Invalid credentials");
+        }
 
         String jti = UUID.randomUUID().toString();
         var refreshTokenOb = RefreshToken.builder()
@@ -76,8 +76,8 @@ AuthController {
         //refresh token save--information
         refreshTokenRepository.save(refreshTokenOb);
 
-            String accessToken = jwtService.generateAccessToken(user);
-            String refreshToken = jwtService.generateRefreshToken(user, refreshTokenOb.getJti());
+        String accessToken = jwtService.generateAccessToken(user);
+        String refreshToken = jwtService.generateRefreshToken(user, refreshTokenOb.getJti());
 
         // use cookie service to attach refresh token in cookie
 
@@ -88,7 +88,28 @@ AuthController {
         return ResponseEntity.ok(tokenResponse);
 
 
-         }
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response) {
+        // Try to revoke the refresh token if present
+        Optional<String> refreshTokenOpt = readRefreshTokenFromRequest(null, request);
+        refreshTokenOpt.ifPresent(token -> {
+            try {
+                String jti = jwtService.getJti(token);
+                refreshTokenRepository.findByJti(jti).ifPresent(rt -> {
+                    rt.setRevoked(true);
+                    refreshTokenRepository.save(rt);
+                });
+            } catch (Exception ignored) {}
+        });
+
+        // Remove the refresh token cookie
+        cookieService.attachRefreshCookie(response, "", 0); // Set empty value and maxAge=0 to delete
+        cookieService.addNoStoreHeaders(response);
+
+        return ResponseEntity.ok().body("Logged out successfully");
+    }
 
     private Authentication authenticate(LoginRequest loginRequest){
         try {

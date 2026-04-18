@@ -14,6 +14,9 @@ const apiClient = axios.create({
 
 apiClient.interceptors.request.use((config) => {
   const accessToken = useAuth.getState().accessToken;
+  const isAuthRoute = config.url?.includes("/auth/login")
+                      || config.url?.includes("/auth/refresh")
+                      ||config.url?.includes("/auth/logout");
   if (accessToken) {
     config.headers.Authorization = `Bearer ${accessToken}`;
   }
@@ -41,7 +44,6 @@ apiClient.interceptors.response.use(
     console.log(original);
     console.log("original retry: ", original._retry);
     if (!is401 || original._retry) {
-      
 
       if (error.response && error.response.data)
         toast.error(error.response.data?.message || "An error occurred");
@@ -77,7 +79,7 @@ apiClient.interceptors.response.use(
           loginResponse.user,
           true
         );
-      
+      //
       resolveQueue(newToken);
       original.headers.Authorization = `Bearer ${newToken}`;
       return apiClient(original);

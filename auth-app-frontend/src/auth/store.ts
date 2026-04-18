@@ -16,6 +16,7 @@ type AuthState = {
   authLoading: boolean;
   login: (loginData: LoginData) => Promise<LoginResponseData>;
   logout: (silent?: boolean) => void;
+
   checkLogin: () => boolean | undefined;
 
   changeLocalLoginData: (
@@ -25,6 +26,7 @@ type AuthState = {
   ) => void;
 };
 
+//main logic for global state
 const useAuth = create<AuthState>()(
   persist(
     (set, get) => ({
@@ -61,32 +63,25 @@ const useAuth = create<AuthState>()(
           });
         }
       },
-      logout: async (silent = false) => {
-        try {
-          //   if (!silent) {
-          //     await logoutUser();
-          //   }
-          set({
-            authLoading: true,
-          });
-          await logoutUser();
-        } catch (error) {
-        } finally {
-          set({
-            authLoading: false,
-          });
-        }
-        // await logoutUser();
-        set({
-          accessToken: null,
-          user: null,
-          authLoading: false,
-          authStatus: false,
-        });
-      },
+     logout: async (silent = false) => {
+          try {
+            if (!silent) {
+              await logoutUser(); 
+              }
+          } catch (error) {
+            console.log("Logout API failed, but clearing local state",error);
+          } finally {
+            set({
+              accessToken: null,
+              user: null,
+              authLoading: false,
+              authStatus: false,
+            });
+          }
+        },
       checkLogin: () => {
         if (get().accessToken && get().authStatus) return true;
-        else false;
+        else return false;
       },
     }),
 

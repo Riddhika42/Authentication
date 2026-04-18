@@ -1,12 +1,10 @@
-import type RegisterData from "@/models/RegisterData";
 import apiClient from "@/config/ApiClient";
-import type LoginResponseData from "@/models/LoginResponseData";
-import type User from "@/models/User";
 import type LoginData from "@/models/LoginData";
-
+import type LoginResponseData from "@/models/LoginResponseData";
+import type RegisterData from "@/models/RegisterData";
+import type User from "@/models/User";
 
 export const registerUser = async (signupData: RegisterData) => {
-  
   const response = await apiClient.post(`/auth/register`, signupData);
   return response.data;
 };
@@ -18,14 +16,24 @@ export const loginUser = async (loginData: LoginData) => {
   );
   return response.data;
 };
+
 export const logoutUser = async () => {
-  const response = await apiClient.post(`/auth/logout`);
+  const response = await apiClient.post(
+    `/auth/logout`,
+    {},
+    {
+      headers: { Authorization: undefined },
+      withCredentials: true,
+    }
+  );
   return response.data;
 };
+
 export const getCurrentUser = async (emailId: string | undefined) => {
   const response = await apiClient.get<User>(`/users/email/${emailId}`);
   return response.data;
 };
+
 export const refreshToken = async () => {
   const response = await apiClient.post<LoginResponseData>(`/auth/refresh`);
   return response.data;

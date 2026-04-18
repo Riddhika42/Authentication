@@ -156,7 +156,7 @@ function Login() {
               <Button
                 disabled={loading}
                 className="w-full cursor-pointer rounded-2xl text-lg"
-              >
+                type="submit">
                 {loading ? (
                   <>
                     <Spinner />

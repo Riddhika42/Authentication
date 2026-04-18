@@ -149,7 +149,7 @@ function Signup() {
                 </div>
               </div>
 
-              <Button className="w-full rounded-2xl text-lg">Sign Up</Button>
+              <Button className="w-full rounded-2xl text-lg" type="submit">Sign Up</Button>
 
               {/* Divider */}
               <div className="flex items-center gap-4 my-4">
