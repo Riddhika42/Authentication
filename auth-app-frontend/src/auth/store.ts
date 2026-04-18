@@ -9,7 +9,6 @@ const LOCAL_KEY = "app_state";
 //type AuthStatus = "idle" | "authenticating" | "authenticated" | "anonymous";
 
 
-
 type AuthState = {
   accessToken: string | null;
   user: User | null;
