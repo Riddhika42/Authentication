@@ -5,12 +5,12 @@ import type User from "@/models/User";
 import type LoginData from "@/models/LoginData";
 
 
-export const registerUser=()=>{
-    // api  call to server to save data
+export const registerUser = async (signupData: RegisterData) => {
+  
   const response = await apiClient.post(`/auth/register`, signupData);
   return response.data;
-    
-}
+};
+
 export const loginUser = async (loginData: LoginData) => {
   const response = await apiClient.post<LoginResponseData>(
     "/auth/login",

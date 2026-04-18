@@ -3,13 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { motion } from "framer-motion";
-import { Mail, Lock, User, Github, Chrome } from "lucide-react";
+import { Mail, Lock, User} from "lucide-react";
 import React, { useState, type FormEvent } from "react";
 import toast from "react-hot-toast";
 import type RegisterData from "@/models/RegisterData";
 import { registerUser } from "@/services/AuthService";
-// import { useNavigate } from "react-router";
-// import OAuth2Buttons from "@/components/OAuth2Buttons";
+import { useNavigate } from "react-router";
+import OAuth2Buttons from "@/components/OAuth2Buttons";
 
 function Signup() {
   const [data, setData] = useState<RegisterData>({
@@ -24,8 +24,8 @@ function Signup() {
   const navigate = useNavigate();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // console.log(event.target.name);
-    // console.log(event.target.value);
+    console.log(event.target.name);
+     console.log(event.target.value);
     setData((value) => ({
       ...value,
       [event.target.name]: event.target.value,

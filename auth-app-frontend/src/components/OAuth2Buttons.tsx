@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "./ui/button";
-import { Chrome, Github } from "lucide-react";
+import { FaGithub , FaChrome} from "react-icons/fa";
 import { NavLink } from "react-router";
 
 function OAuth2Buttons() {
@@ -17,7 +17,7 @@ function OAuth2Buttons() {
           variant="outline"
           className="w-full cursor-pointer flex items-center gap-3 rounded-2xl"
         >
-          <Chrome className="w-5 h-5" /> Continue with Google
+          <FaChrome className="w-5 h-5" /> Continue with Google
         </Button>
       </NavLink>
 
@@ -32,7 +32,7 @@ function OAuth2Buttons() {
           variant="outline"
           className="w-full flex cursor-pointer items-center gap-3 rounded-2xl"
         >
-          <Github className="w-5 h-5" /> Continue with GitHub
+          <FaGithub className="w-5 h-5" /> Continue with GitHub
         </Button>
       </NavLink>
     </div>
