@@ -56,7 +56,7 @@ public class SecurityConfig {
                                 .anyRequest().authenticated()
                 ).oauth2Login(
                                         oauth2 -> oauth2.successHandler(successHandler)
-                        .failureHandler(null))
+                        .failureHandler(failureHandler()))
                 .logout(AbstractHttpConfigurer::disable)
                 .exceptionHandling(
                         ex -> ex.authenticationEntryPoint
@@ -93,6 +93,14 @@ public class SecurityConfig {
 
         return http.build();
 
+    }
+    @Bean
+        public org.springframework.security.web.authentication.AuthenticationFailureHandler failureHandler() {
+
+        return (request, response , exception) -> {
+            String failureRedirect = "http://localhost:5173/oauth/failure" ;
+            response.sendRedirect(failureRedirect);
+        };
     }
 
 

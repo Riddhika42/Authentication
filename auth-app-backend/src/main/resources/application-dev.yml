@@ -60,4 +60,6 @@ app:
     front-end-url: http://localhost:5173
   auth:
     frontend:
-      success-redirect: http://localhost:5173
+      success-redirect: http://localhost:5173/oauth/success
+      failure-redirect: http://localhost:5173/oauth/failure
+

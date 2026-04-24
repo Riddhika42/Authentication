@@ -38,6 +38,11 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
     @Value("${app.auth.frontend.success-redirect}")
     private String frontEndSuccessUrl;
 
+    @Value("${app.auth.frontend.failure-redirect:http://localhost:5173/oauth/failure}")
+    private String frontEndFailureUrl;
+
+
+
 
     @Override
     @Transactional
@@ -72,7 +77,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
                         .image(picture)
                         .enable(true)
                         .provider(Provider.GOOGLE)
-                        //.providerId(googleId)
+                       // .providerId(googleId)
                         .build();
 
 
