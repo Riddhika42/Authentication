@@ -35,6 +35,7 @@ public class SecurityConfig {
 
 
     private JwtAuthenticationFilter jwtAuthenticationFilter;
+    
     private AuthenticationSuccessHandler successHandler;
 
     public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter, AuthenticationSuccessHandler successHandler) {
